@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #B0C4DE; /* Light blue-grey shade */
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 200px;
+        }
+
+        .countdown {
+            text-align: center;
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+        }
+
+        .countdown h1 {
+            margin: 10px 0;
+            font-size: 2em;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .timer div {
+            margin: 0 15px;
+        }
+
+        .timer span {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://github.com/ivoong8/SuperNova/blob/main/HIEFO_no%20slogan.png?raw=true" class="logo"> 
+
+    <div class="countdown">
+        <h1>High Power C-Band DFB for Movelaser Sample Chip Available in</h1>
+        <p>Time remaining: <span id="countdown-movelaser"></span></p>
+        <div class="timer">
+            <div>
+                <span id="days-movelaser"></span> Days
+            </div>
+            <div>
+                <span id="hours-movelaser"></span> Hours
+            </div>
+            <div>
+                <span id="minutes-movelaser"></span> Minutes
+            </div>
+            <div>
+                <span id="seconds-movelaser"></span> Seconds
+            </div>
+        </div>
+    </div>
+
+    <div class="countdown">
+        <h1>1410nm Pulsar 1st Run of Production Wafers Finished in</h1>
+        <p>Time remaining: <span id="countdown-pulsar"></span></p>
+        <div class="timer">
+            <div>
+                <span id="days-pulsar"></span> Days
+            </div>
+            <div>
+                <span id="hours-pulsar"></span> Hours
+            </div>
+            <div>
+                <span id="minutes-pulsar"></span> Minutes
+            </div>
+            <div>
+                <span id="seconds-pulsar"></span> Seconds
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const eventDate = new Date("April 20, 2025 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            if (document.getElementById("days-movelaser")) {
+                document.getElementById("days-movelaser").textContent = days;
+                document.getElementById("hours-movelaser").textContent = hours;
+                document.getElementById("minutes-movelaser").textContent = minutes;
+                document.getElementById("seconds-movelaser").textContent = seconds;
+                document.getElementById("countdown-movelaser").textContent = `${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
+            }
+
+            if (document.getElementById("days-pulsar")) {
+                document.getElementById("days-pulsar").textContent = days;
+                document.getElementById("hours-pulsar").textContent = hours;
+                document.getElementById("minutes-pulsar").textContent = minutes;
+                document.getElementById("seconds-pulsar").textContent = seconds;
+                document.getElementById("countdown-pulsar").textContent = `${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
+            }
+
+            if (timeLeft < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown-movelaser").textContent = "The event has started!";
+                document.getElementById("countdown-pulsar").textContent = "The event has started!";
+                document.querySelectorAll(".timer").forEach(timer => timer.style.display = "none");
+            }
+        }
+
+        const countdown = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
